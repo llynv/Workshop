@@ -55,7 +55,6 @@
         <li><a href="./admin_controller?action=addProduct">Add Product</a></li>
         <li><a href="./admin_controller?action=addAccount">Add Account</a></li>
         <li><a href="./admin_controller?action=accCategory">Add Category</a></li>
-        <li><a href="./admin_controller?action=listProduct">List Product</a></li>
     </ul>
 </body>
 
