@@ -48,7 +48,7 @@
         <button class="w3-button">Categories <i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block w3-card-4">
           <% 
-          List<Category> headerCategories = (new CategoryDAO()).getAllList();
+          List<Category> headerCategories = (new CategoryDAO(getServletContext())).getAllList();
           for (Category category : headerCategories) { 
           %>
             <a href="/category?name=<%= category.getTypeId() %>" class="w3-bar-item w3-button"><%= category.getCategoryName() %></a>

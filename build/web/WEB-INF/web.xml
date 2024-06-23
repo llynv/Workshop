@@ -26,7 +26,7 @@
         <url-pattern>/accounts/testing</url-pattern>
     </servlet-mapping>
     <context-param>
-        <param-name>hostAddress</param-name>
+        <param-name>hostName</param-name>
         <param-value>localhost</param-value>
     </context-param>
     <context-param>
@@ -38,15 +38,15 @@
         <param-value>ProductIntro</param-value>
     </context-param>
     <context-param>
-        <param-name>userName</param-name>
+        <param-name>user</param-name>
         <param-value>sa</param-value>
     </context-param>
     <context-param>
-        <param-name>userPass</param-name>
+        <param-name>pass</param-name>
         <param-value>1</param-value>
     </context-param>
     <context-param>
-        <param-name>dbPort</param-name>
+        <param-name>port</param-name>
         <param-value>1433</param-value>
     </context-param>
     <servlet-mapping>

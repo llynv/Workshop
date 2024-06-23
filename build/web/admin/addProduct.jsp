@@ -7,10 +7,10 @@
 <!DOCTYPE html>
 
 <%
-    CategoryDAO categoryDAO = new CategoryDAO();
+    CategoryDAO categoryDAO = new CategoryDAO(getServletContext());
     List<Category> categories = categoryDAO.getAllList();
 
-    AccountDAO accountDAO = new AccountDAO();
+    AccountDAO accountDAO = new AccountDAO(getServletContext());
     List<Account> accounts = accountDAO.getAllList();
 %>
 

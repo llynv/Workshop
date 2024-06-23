@@ -10,7 +10,7 @@
         response.sendRedirect("/admin/manage_account");
         return;
     }
-    AccountDAO accountDAO = new AccountDAO();
+    AccountDAO accountDAO = new AccountDAO(getServletContext());
     Account user = accountDAO.getObjectById(username);
     SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
     int roleInSystem = user.getRoleInSystem();

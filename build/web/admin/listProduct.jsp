@@ -9,7 +9,7 @@
 <%@ page import="model.Product" %>
 <%@ page import="model.dao.ProductDAO" %>
 <%
-    ProductDAO productDAO = new ProductDAO();
+    ProductDAO productDAO = new ProductDAO(getServletContext());
     List<Product> products = productDAO.getAllList();
 %>
 <!DOCTYPE html>

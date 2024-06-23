@@ -3,7 +3,7 @@
 <%@ page import="model.Account" %>
 <%@ page import="model.dao.AccountDAO" %>
 <%
-    AccountDAO accountDAO = new AccountDAO();
+    AccountDAO accountDAO = new AccountDAO(getServletContext());
     List<Account> accounts = accountDAO.getAllList();
 %>
 <!DOCTYPE html>
