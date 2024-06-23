@@ -53,7 +53,7 @@ public class MainController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
         HttpSession session = request.getSession();
-        AccountDAO accountDAO = new AccountDAO();
+        AccountDAO accountDAO = new AccountDAO(request.getServletContext());
         Account user = (Account) session.getAttribute("user");
         String password = request.getParameter("pass");
         Date dob = Date.valueOf(request.getParameter("birthday"));
@@ -82,7 +82,7 @@ public class MainController extends HttpServlet {
         String password = request.getParameter("new-password");
         String repeatPassword = request.getParameter("repeat-password");
 
-        AccountDAO accountDAO = new AccountDAO();
+        AccountDAO accountDAO = new AccountDAO(request.getServletContext());
         if (accountDAO.getObjectById(username) != null) {
             request.setAttribute("errorMessage", "Username already exists");
             request.getRequestDispatcher("register.jsp").forward(request, response);
@@ -99,7 +99,8 @@ public class MainController extends HttpServlet {
     private void login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
-        Account authenticateAccount = authenticate(username, password);
+        AccountDAO accountDAO = new AccountDAO(request.getServletContext());
+        Account authenticateAccount = authenticate(username, password, accountDAO);
         if (authenticateAccount != null && authenticateAccount.getIsUse()) {
             HttpSession session = request.getSession();
             session.setAttribute("user", authenticateAccount);
@@ -114,8 +115,7 @@ public class MainController extends HttpServlet {
         }
     }
 
-    private Account authenticate(String username, String password) {
-        AccountDAO accountDAO = new AccountDAO();
+    private Account authenticate(String username, String password, AccountDAO accountDAO) {
         Account account = accountDAO.getObjectById(username);
         if (account != null && account.getPass().equals(password)) {
             return account;

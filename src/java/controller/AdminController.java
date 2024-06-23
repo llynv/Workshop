@@ -46,7 +46,7 @@ public class AdminController extends HttpServlet {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
             return;
         }
-        AccountDAO accountDAO = new AccountDAO();
+        AccountDAO accountDAO = new AccountDAO(request.getServletContext());
 
         switch (action) {
             case "addAccount":
@@ -70,7 +70,7 @@ public class AdminController extends HttpServlet {
                 response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/admin/manage_account"));
                 break;
             case "listProduct":
-                ProductDAO productDAO = new ProductDAO();
+                ProductDAO productDAO = new ProductDAO(request.getServletContext());
                 request.setAttribute("listProduct", productDAO.getAllList());
                 request.getRequestDispatcher("/admin/listProduct.jsp").forward(request, response);
                 break;
@@ -83,7 +83,7 @@ public class AdminController extends HttpServlet {
     private void updateProfile (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
-        AccountDAO accountDAO = new AccountDAO();
+        AccountDAO accountDAO = new AccountDAO(request.getServletContext());
         String username = request.getParameter("account");
         Account user = accountDAO.getObjectById(username);
         String password = request.getParameter("pass");
@@ -134,7 +134,7 @@ public class AdminController extends HttpServlet {
                 int role = Integer.parseInt(request.getParameter("role"));
                 String phone = request.getParameter("phone");
                 boolean isUse = Boolean.parseBoolean(request.getParameter("state"));
-                AccountDAO accountDAO = new AccountDAO();
+                AccountDAO accountDAO = new AccountDAO(request.getServletContext());
                 Account newAccount = new Account(username, password, lastName, firstName, dob, gender, phone, isUse, role);
                 String accMessage = "";
                 if (accountDAO.insertRec(newAccount) == 1) {
@@ -162,7 +162,7 @@ public class AdminController extends HttpServlet {
                 int price = Integer.parseInt(request.getParameter("price"));
                 int discount = Integer.parseInt(request.getParameter("discount"));
 
-                ProductDAO productDAO = new ProductDAO();
+                ProductDAO productDAO = new ProductDAO(request.getServletContext());
                 productDAO.insertRec(new Product(productId, productName, productImage, brief, postedDate, typeId, account, unit, price, discount));
                 break;
             case "deteleAccount":
