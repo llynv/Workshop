@@ -69,6 +69,11 @@ public class AdminController extends HttpServlet {
                 accountDAO.updateRec(accountDeactivateObj);
                 response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/admin/manage_account"));
                 break;
+            case "listProduct":
+                ProductDAO productDAO = new ProductDAO();
+                request.setAttribute("listProduct", productDAO.getAllList());
+                request.getRequestDispatcher("/admin/listProduct.jsp").forward(request, response);
+                break;
             default:
                 response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
                 break;
