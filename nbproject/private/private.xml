@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/web/admin/index.jsp</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/web/index.jsp</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/src/java/utilities/DBContext.java</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/nbproject/build-impl.xml</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/src/java/model/Category.java</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/src/java/controller/MainController.java</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/web/WEB-INF/web.xml</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/web/profile.jsp</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/src/java/model/Account.java</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/web/register.jsp</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/web/admin/addProduct.jsp</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/web/admin/manageAccount.jsp</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/src/java/model/dao/CategoryDAO.java</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/web/admin/addAccount.jsp</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/src/java/model/dao/ProductDAO.java</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/web/login.jsp</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/src/java/model/Product.java</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/src/java/controller/account/ManageAccount.java</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/web/css/style.css</file>
+            <file>file:/C:/Users/asus/Documents/Workspace/Study/WorkShop/src/java/controller/AdminController.java</file>
+        </group>
+    </open-files>
+</project-private>
