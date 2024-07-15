@@ -100,27 +100,23 @@ public class MainController extends HttpServlet {
         String username = request.getParameter("username");
         String password = request.getParameter("password");
         AccountDAO accountDAO = new AccountDAO(request.getServletContext());
-        Account authenticateAccount = authenticate(username, password, accountDAO);
-        if (authenticateAccount != null && authenticateAccount.getIsUse()) {
+        Account authenticateAccount = accountDAO.getObjectById(username);
+        
+        if (authenticateAccount == null || authenticateAccount.getPass().compareTo(password) != 0) {   
+            request.setAttribute("errorMessage", "Invalid username or password");
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+        
+        if (authenticateAccount.getIsUse()) {
             HttpSession session = request.getSession();
             session.setAttribute("user", authenticateAccount);
             session.setAttribute("role", authenticateAccount.getRoleInSystem());
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
-        } else if (authenticateAccount != null && !authenticateAccount.getIsUse()) {
+        } else {
             request.setAttribute("errorMessage", "Account is deactivated");
             request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            request.setAttribute("errorMessage", "Invalid username or password");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
-    }
-
-    private Account authenticate(String username, String password, AccountDAO accountDAO) {
-        Account account = accountDAO.getObjectById(username);
-        if (account != null && account.getPass().equals(password)) {
-            return account;
-        }
-        return null;
     }
 
     @Override
