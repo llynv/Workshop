@@ -51,7 +51,7 @@
           List<Category> headerCategories = (new CategoryDAO(getServletContext())).getAllList();
           for (Category category : headerCategories) { 
           %>
-            <a href="/category?name=<%= category.getTypeId() %>" class="w3-bar-item w3-button"><%= category.getCategoryName() %></a>
+            <a href="/category?id=<%= category.getTypeId() %>" class="w3-bar-item w3-button"><%= category.getCategoryName() %></a>
           <% } %>
         </div>
       </div>

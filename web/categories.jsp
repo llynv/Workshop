@@ -1,10 +1,11 @@
+<%@page import="model.dao.CategoryDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" %>
 <%@ page import="model.Product" %>
 <%@ page import="model.dao.ProductDAO" %>
 <%
-    ProductDAO productDAO = new ProductDAO(getServletContext());
-    List<Product> products = productDAO.getAllList();
+    List<Product> products = (List<Product>) request.getAttribute("productsByCatagory");
+    CategoryDAO categoryDAO = new CategoryDAO(request.getServletContext());
 %>
 <!DOCTYPE html>
 <html lang="en">
@@ -62,12 +63,11 @@
                 <th>Product Image</th>
                 <th>Brief</th>
                 <th>Posted Date</th>
-                <th>Type ID</th>
+                <th>Category</th>
                 <th>Account</th>
                 <th>Unit</th>
                 <th>Price</th>
                 <th>Discount</th>
-                <th>Actions</th>
             </tr>
         </thead>
         <tbody>
@@ -78,19 +78,11 @@
                     <td><img src="<%= product.getProductImage() %>" alt="Product Image"></td>
                     <td><%= product.getBrief() %></td>
                     <td><%= product.getPostedDate() %></td>
-                    <td><%= product.getTypeId() %></td>
+                    <td><%= categoryDAO.getObjectById(product.getTypeId()+"").getCategoryName()%></td>
                     <td><%= product.getAccount() %></td>
                     <td><%= product.getUnit() %></td>
                     <td><%= product.getPrice() %></td>
                     <td><%= product.getDiscount() %></td>
-                    <td class="action-buttons">
-                        <a href="./admin_controller?action=updateProduct&productId=<%=product.getProductId()%>" style="display: inline; text-decoration: none;">
-                            <button type="submit" class="update-button">Update</button>
-                        </a>
-                        <a href="./admin_controller?action=deleteProduct&productId=<%=product.getProductId()%>" style="display:inline; text-decoration: none">
-                            <button type="submit" class="delete-button">Delete</button>
-                        </a>
-                    </td>
                 </tr>
             <% } %>
         </tbody>

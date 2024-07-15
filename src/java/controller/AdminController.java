@@ -17,8 +17,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import model.Account;
+import model.Category;
 import model.Product;
 import model.dao.AccountDAO;
+import model.dao.CategoryDAO;
 import model.dao.ProductDAO;
 
 /**
@@ -34,13 +36,6 @@ public class AdminController extends HttpServlet {
         response.setCharacterEncoding("UTF-8");
         request.setCharacterEncoding("UTF-8");
 
-        HttpSession session = request.getSession();
-        Account user = (Account) session.getAttribute("user");
-        if (user == null || user.getRoleInSystem() != 1) {
-            response.sendRedirect("/error");
-            return;
-        }
-
         String action = request.getParameter("action");
         if (action == null) {
             response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
@@ -49,6 +44,10 @@ public class AdminController extends HttpServlet {
         AccountDAO accountDAO = new AccountDAO(request.getServletContext());
 
         switch (action) {
+            case "manageAccount":
+                request.setAttribute("listAccount", accountDAO.getAllList());
+                request.getRequestDispatcher("/admin/manageAccount.jsp").forward(request, response);
+                break;
             case "addAccount":
                 request.getRequestDispatcher("/admin/addAccount.jsp").forward(request, response);
                 break;
@@ -67,12 +66,17 @@ public class AdminController extends HttpServlet {
                 Account accountDeactivateObj = accountDAO.getObjectById(accountDeactivate);
                 accountDeactivateObj.setIsUse(!accountDeactivateObj.getIsUse());
                 accountDAO.updateRec(accountDeactivateObj);
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/admin/manage_account"));
+                response.sendRedirect("/admin/admin_controller?action=manageAccount");
                 break;
             case "listProduct":
                 ProductDAO productDAO = new ProductDAO(request.getServletContext());
                 request.setAttribute("listProduct", productDAO.getAllList());
                 request.getRequestDispatcher("/admin/listProduct.jsp").forward(request, response);
+                break;
+            case "addCategory":
+                CategoryDAO categoryDAO = new CategoryDAO(request.getServletContext());
+                request.setAttribute("listCategory", categoryDAO.getAllList());
+                request.getRequestDispatcher("/admin/addCategory.jsp").forward(request, response);
                 break;
             default:
                 response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/"));
@@ -109,7 +113,24 @@ public class AdminController extends HttpServlet {
         accountDAO.updateRec(update);
     }
 
-
+    private void addCategory (HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        response.setCharacterEncoding("UTF-8");
+        request.setCharacterEncoding("UTF-8");
+        CategoryDAO categoryDAO = new CategoryDAO(request.getServletContext());
+        int typeId = Integer.parseInt(request.getParameter("typeId"));
+        if (categoryDAO.getObjectById(String.valueOf(typeId)) != null) {
+            request.setAttribute("message", "Category ID is already exist!");
+            request.setAttribute("listCategory", categoryDAO.getAllList());
+            request.getRequestDispatcher("/admin/addCategory.jsp").forward(request, response);
+            return;
+        }
+        String categoryName = request.getParameter("categoryName");
+        String memo = request.getParameter("memo");
+        int isInsertSuccess = categoryDAO.insertRec(new Category(typeId, categoryName, memo));
+        request.setAttribute("message", (isInsertSuccess == 1) ? "Add category success!" : "Add category failed!");
+        request.setAttribute("listCategory", categoryDAO.getAllList());
+        request.getRequestDispatcher("/admin/addCategory.jsp").forward(request, response);
+    }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
@@ -148,7 +169,7 @@ public class AdminController extends HttpServlet {
             case "updateAccount":
                 updateProfile(request, response);
                 response.setCharacterEncoding("UTF-8");
-                response.sendRedirect(response.encodeRedirectURL(request.getContextPath() + "/admin/manage_account"));
+                response.sendRedirect("/admin/admin_controller?action=manageAccount");
                 break;
             case "addProduct":
                 String productId = request.getParameter("productId");
@@ -164,6 +185,9 @@ public class AdminController extends HttpServlet {
 
                 ProductDAO productDAO = new ProductDAO(request.getServletContext());
                 productDAO.insertRec(new Product(productId, productName, productImage, brief, postedDate, typeId, account, unit, price, discount));
+                break;
+            case "addCategory":
+                addCategory(request, response);
                 break;
             case "deteleAccount":
                 break;

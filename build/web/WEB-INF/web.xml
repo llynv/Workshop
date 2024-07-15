@@ -1,5 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <web-app version="3.1" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+    <filter>
+        <filter-name>FileFilter</filter-name>
+        <filter-class>filter.FileFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>FileFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
     <servlet>
         <servlet-name>accounts</servlet-name>
         <servlet-class>controller.AccountController</servlet-class>
@@ -16,6 +24,18 @@
         <!-- admin_controller -->
         <servlet-name>adminController</servlet-name>
         <servlet-class>controller.AdminController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>mainController</servlet-name>
+        <servlet-class>controller.MainController</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>products</servlet-name>
+        <servlet-class>controller.products</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>category</servlet-name>
+        <servlet-class>controller.category</servlet-class>
     </servlet>
     <servlet-mapping>
         <servlet-name>adminController</servlet-name>
@@ -43,7 +63,7 @@
     </context-param>
     <context-param>
         <param-name>pass</param-name>
-        <param-value>1</param-value>
+        <param-value>12345</param-value>
     </context-param>
     <context-param>
         <param-name>port</param-name>
@@ -56,6 +76,18 @@
     <servlet-mapping>
         <servlet-name>addAccount</servlet-name>
         <url-pattern>/add_account</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>mainController</servlet-name>
+        <url-pattern>/main_controller</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>products</servlet-name>
+        <url-pattern>/products</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>category</servlet-name>
+        <url-pattern>/category</url-pattern>
     </servlet-mapping>
     <session-config>
         <session-timeout>

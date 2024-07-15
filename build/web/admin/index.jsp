@@ -51,10 +51,10 @@
 <body>
     <h1>Welcome to the Admin Dashboard</h1>
     <ul class="admin-menu">
-        <li><a href="./manage_account">Manage Account</a></li>
+        <li><a href="./admin_controller?action=manageAccount">Manage Account</a></li>
         <li><a href="./admin_controller?action=addProduct">Add Product</a></li>
         <li><a href="./admin_controller?action=addAccount">Add Account</a></li>
-        <li><a href="./admin_controller?action=accCategory">Add Category</a></li>
+        <li><a href="./admin_controller?action=addCategory">Add Category</a></li>
         <li><a href="./admin_controller?action=listProduct">List Product</a></li>
     </ul>
 </body>
