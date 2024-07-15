@@ -45,7 +45,7 @@
       <a href="/products" class="w3-bar-item w3-button">Products</a>
       <!-- Categories Dropdown -->
       <div class="w3-dropdown-hover">
-        <a href="/category"  class="w3-button">Categories <i class="fa fa-caret-down"></i></a>
+        <button class="w3-button">Categories <i class="fa fa-caret-down"></i></button>
         <div class="w3-dropdown-content w3-bar-block w3-card-4">
           <% 
           List<Category> headerCategories = (new CategoryDAO(getServletContext())).getAllList();
